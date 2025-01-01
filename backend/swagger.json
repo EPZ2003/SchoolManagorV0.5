@@ -1,0 +1,169 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Course API",
+    "description": "API for managing courses",
+    "version": "0.5"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Check if the server works",
+        "responses": {
+          "200": {
+            "description": "Server is alive",
+            "content": {
+              "text/plain": {
+                "example": "alive"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses": {
+      "get": {
+        "summary": "Get all courses",
+        "responses": {
+          "200": {
+            "description": "List of courses",
+            "content": {
+              "application/json": {
+                "example": [
+                  { "id": 1, "name": "Course 1" },
+                  { "id": 2, "name": "Course 2" }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new course",
+        "requestBody": {
+          "description": "Course object that needs to be added",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "New Course"
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Course created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/course/{id}": {
+      "get": {
+        "summary": "Get a course by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the course to retrieve",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Course details",
+            "content": {
+              "application/json": {
+                "example": { "id": 1, "name": "Course 1" }
+              }
+            }
+          },
+          "404": {
+            "description": "Course not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an existing course",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the course to update",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updated course object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Updated Course"
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Course updated successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Course not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a course by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the course to delete",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Course deleted successfully"
+          },
+          "404": {
+            "description": "Course not found"
+          }
+        }
+      }
+    }
+  }
+}
