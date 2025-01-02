@@ -2,19 +2,22 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Course API",
-    "description": "API for managing courses",
-    "version": "0.5"
+    "version": "0.5",
+    "description": "API to manage courses"
   },
   "paths": {
     "/": {
       "get": {
-        "summary": "Check if the server works",
+        "summary": "Check if the server is working",
         "responses": {
           "200": {
             "description": "Server is alive",
             "content": {
               "text/plain": {
-                "example": "alive"
+                "schema": {
+                  "type": "string",
+                  "example": "alive"
+                }
               }
             }
           }
@@ -26,60 +29,38 @@
         "summary": "Get all courses",
         "responses": {
           "200": {
-            "description": "List of courses",
+            "description": "List of all courses",
             "content": {
               "application/json": {
-                "example": [
-                  { "id": 1, "name": "Course 1" },
-                  { "id": 2, "name": "Course 2" }
-                ]
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Add a new course",
-        "requestBody": {
-          "description": "Course object that needs to be added",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "New Course"
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "course": { "type": "string" },
+                      "module": { "type": "string" }
+                    }
                   }
-                },
-                "required": ["name"]
+                }
               }
             }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Course created successfully"
-          },
-          "400": {
-            "description": "Invalid input"
           }
         }
       }
     },
-    "/course/{id}": {
+    "/course": {
       "get": {
         "summary": "Get a course by ID",
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "query",
+            "description": "ID of the course",
             "required": true,
-            "description": "ID of the course to retrieve",
             "schema": {
               "type": "integer",
-              "example": 1
+              "example": 2
             }
           }
         ],
@@ -88,12 +69,58 @@
             "description": "Course details",
             "content": {
               "application/json": {
-                "example": { "id": 1, "name": "Course 1" }
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer" },
+                    "course": { "type": "string" },
+                    "module": { "type": "string" }
+                  }
+                }
               }
             }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new course",
+        "parameters": [
+          {
+            "name": "course",
+            "in": "query",
+            "description": "Name of the course",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Mathematics"
+            }
           },
-          "404": {
-            "description": "Course not found"
+          {
+            "name": "module",
+            "in": "query",
+            "description": "Module of the course",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Algebra"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "New course created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer" },
+                    "course": { "type": "string" },
+                    "module": { "type": "string" }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -102,42 +129,48 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "description": "ID of the course to update",
+            "required": true,
             "schema": {
               "type": "integer",
-              "example": 1
+              "example": 2
+            }
+          },
+          {
+            "name": "column",
+            "in": "query",
+            "description": "The column name to update",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "module"
+            }
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "description": "The new value for the column",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Calculus"
             }
           }
         ],
-        "requestBody": {
-          "description": "Updated course object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "Updated Course"
-                  }
-                },
-                "required": ["name"]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "Course updated successfully"
-          },
-          "400": {
-            "description": "Invalid input"
-          },
-          "404": {
-            "description": "Course not found"
+            "description": "Course updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "updated": { "type": "integer" }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -146,9 +179,9 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "description": "ID of the course to delete",
+            "required": true,
             "schema": {
               "type": "integer",
               "example": 1
@@ -157,10 +190,17 @@
         ],
         "responses": {
           "200": {
-            "description": "Course deleted successfully"
-          },
-          "404": {
-            "description": "Course not found"
+            "description": "Course deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deleted": { "type": "integer", "example": 1 }
+                  }
+                }
+              }
+            }
           }
         }
       }
