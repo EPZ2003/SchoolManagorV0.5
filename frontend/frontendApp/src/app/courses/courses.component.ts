@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ApiServiceService } from '../api-service.service';
 
 @Component({
   selector: 'app-courses',
@@ -8,5 +9,11 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './courses.component.css'
 })
 export class CoursesComponent {
+  private readonly apiservice:ApiServiceService = inject(ApiServiceService);
 
+  ngOnInit() {
+    this.apiservice.getCourses().subscribe({
+      next : data => console.log(data)
+    })
+  }
 }
