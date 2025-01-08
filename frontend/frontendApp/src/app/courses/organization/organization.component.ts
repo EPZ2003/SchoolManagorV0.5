@@ -14,8 +14,8 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrl: './organization.component.css'
 })
 export class OrganizationComponent {
+  //Injection with the service that comunicates with the backend
   private readonly apiService:ApiServiceService = inject(ApiServiceService);
-  rowData = [];
 
   //Creation of 3 rowData for 3 differents tables with the same colDefs
   rowDataModA:Courses[] = [];
@@ -23,7 +23,7 @@ export class OrganizationComponent {
   rowDataModC:Courses[] = [];
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-      { field: "course", flex:1 },
+      { field: "course", flex: 1},
       { field: "module", flex: 1},
   ];
 

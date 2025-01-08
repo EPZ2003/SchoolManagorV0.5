@@ -5,6 +5,8 @@ import { OrganizationComponent } from './courses/organization/organization.compo
 import { DeadlineComponent } from './courses/deadline/deadline.component';
 import { TodoListComponent } from './courses/todo-list/todo-list.component';
 import { SideProjectComponent } from './courses/side-project/side-project.component';
+import { Component } from '@angular/core';
+
 
 export const routes: Routes = [
     {
@@ -17,7 +19,8 @@ export const routes: Routes = [
         children: [
             {
                 path:"organization-part",
-                component: OrganizationComponent
+                component: OrganizationComponent,
+
             },
             {
                 path:"deadline-part",
