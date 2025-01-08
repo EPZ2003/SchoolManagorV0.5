@@ -38,7 +38,8 @@ export class OrganizationComponent {
         //Using filter for each table and choose the good module for each one (ex: ) 
         this.rowDataModA = data.filter(item => item.module =="algebra"); 
         this.rowDataModB = data.filter(item => item.module =="science");
-        this.rowDataModC = data.filter(item => item.module =="physics"); 
+        //this.rowDataModC = data.filter(item => item.module =="physics"); 
+        this.rowDataModC = data; 
       },
       error: err => console.error('Error fetching courses:', err)
     });

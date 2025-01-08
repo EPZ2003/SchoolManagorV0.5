@@ -1,44 +1,37 @@
-<div class="container mt-4">
-    <h2 class="mb-4">Course Form</h2>
-    <form (ngSubmit)="createCourse()">
-      <!-- Course Input -->
-      <div class="mb-3">
-        <label for="course" class="form-label">Course</label>
-        <input
-          type="text"
-          id="course"
-          class="form-control"
-          [(ngModel)]="course.course"
-          name="course"
-          placeholder="Enter course name"
-          required
-        />
-      </div>
-  
-      <!-- Module Input -->
-      <div class="mb-3">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="course" class="form-label">Course</label>
+            <input
+                type="text"
+                id="course"
+                class="form-control"
+                [(ngModel)]="course.course"
+                name="course"
+                placeholder="Enter course name"
+                required/>
+                </div>
+    </div>
+    <div class="col-md-4">
         <label for="module" class="form-label">Module</label>
         <input
-          type="text"
-          id="module"
-          class="form-control"
-          [(ngModel)]="course.module"
-          name="module"
-          placeholder="Enter module name"
-          required
+            type="text"
+            id="module"
+            class="form-control"
+            [(ngModel)]="course.module"
+            name="module"
+            placeholder="Enter module name"
+            required
         />
-      </div>
-  
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  
-    <hr class="my-4">
-  
-    <!-- Display the Object -->
-    <div>
-      <h4>Current Object:</h4>
-      <pre>{{ course | json }}</pre>
     </div>
-  </div>
+
+</div>
+<button (click)="createCourse()">test</button>
+<!-- Display the Object -->
+<div>
+    <h4>Current Object:</h4>
+    <pre>{{ course | json }}</pre>
+</div>
+
   

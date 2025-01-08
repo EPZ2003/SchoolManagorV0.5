@@ -11,12 +11,21 @@ import { JsonPipe } from '@angular/common';
 })
 export class CreationCourseComponent {
   private readonly apiService: ApiServiceService = inject(ApiServiceService);
-
+  
   course:Courses = {
     course:'',
     module:'',
   }
+  ngOnInit(){
+    this.course = {
+      course:"enzo",
+      module:"enzo",
+    }
+  }
   createCourse() {
-
+    this.apiService.createCourse({course:"test",module:"test"}).subscribe({
+      next:() => console.log("OK"),
+      error: error => console.log("WRONG")
+    })
   }
 }
