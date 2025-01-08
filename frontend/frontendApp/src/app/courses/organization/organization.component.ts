@@ -4,12 +4,13 @@ import type { ColDef } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
 import { ApiServiceService } from '../../api-service.service';
 import { Courses } from '../../models/Courses.dto';
+import { RouterOutlet } from '@angular/router';
 
 // Register all Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
 @Component({
   selector: 'app-organization',
-  imports: [AgGridAngular],
+  imports: [AgGridAngular,RouterOutlet],
   templateUrl: './organization.component.html',
   styleUrl: './organization.component.css'
 })
