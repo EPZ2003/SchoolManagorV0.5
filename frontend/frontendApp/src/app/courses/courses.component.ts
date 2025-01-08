@@ -9,11 +9,5 @@ import { ApiServiceService } from '../api-service.service';
   styleUrl: './courses.component.css'
 })
 export class CoursesComponent {
-  private readonly apiservice:ApiServiceService = inject(ApiServiceService);
 
-  ngOnInit() {
-    this.apiservice.getCourses().subscribe({
-      next : data => console.log(data)
-    })
-  }
 }
