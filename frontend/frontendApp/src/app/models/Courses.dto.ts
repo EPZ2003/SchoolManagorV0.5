@@ -1,6 +1,4 @@
 export interface Courses {
-    id:number,
     course:string,
     module:string,
-    
 }

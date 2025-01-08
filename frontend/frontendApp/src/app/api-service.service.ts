@@ -13,4 +13,8 @@ export class ApiServiceService {
   getCourses() : Observable<Courses[]> {
     return this.httpClient.get<Courses[]>('/api/courses')
   }
+
+  createCourse(course:Courses) : Observable<any> {
+    return this.httpClient.post<Courses>('api/course',course)
+  }
 }
