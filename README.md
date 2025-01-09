@@ -34,7 +34,21 @@ Follow these steps to execute the frontend:
 2. Install angular CLI package
    ```bash
    npm install
+   npm install -g @angular/cli
    ```
+   Then it will ask you to accept or not 2 shared data (you can say yes and cancel it later). Finally if it's all works you will see :
+   ```bash
+   Application bundle generation complete. [2.620 seconds]
+
+   Watch mode enabled. Watching for file changes...
+   NOTE: Raw file sizes do not reflect development server per-request transformations.
+     ➜  Local:   http://localhost:4200/
+     ➜  press h + enter to show help
+   ```
+   
+
+
+
    
 
   
