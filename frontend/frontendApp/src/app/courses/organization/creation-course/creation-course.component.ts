@@ -16,8 +16,7 @@ export class CreationCourseComponent {
     course:'',
     module:'',
   }
-  ngOnInit(){
-  }
+
   //Calling the post method with the filled course
   createCourse() {
     this.apiService.createCourse(this.course).subscribe({
