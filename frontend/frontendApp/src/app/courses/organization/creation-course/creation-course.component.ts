@@ -23,7 +23,7 @@ export class CreationCourseComponent {
     }
   }
   createCourse() {
-    this.apiService.createCourse({course:"test",module:"test"}).subscribe({
+    this.apiService.createCourse(this.course).subscribe({
       next:() => console.log("OK"),
       error: error => console.log("WRONG")
     })
