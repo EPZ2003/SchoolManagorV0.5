@@ -23,4 +23,18 @@ Follow these steps to execute the backend:
     Connection established successfully for the Table Course 
 
 # Frontend Part
+
+## Technologies Used 
+- **TODO**
+
+## How to Run the Backend
+Follow these steps to execute the frontend:
+
+1. Open a terminal and navigate to the frontendApp repository.
+2. Install angular CLI package
+   ```bash
+   npm install
+   ```
+   
+
   
