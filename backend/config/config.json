@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "testDocker",
+    "password": "enzo",
+    "database": "SM_DB",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "testDocker",
+    "password": "enzo",
+    "database": "SM_DB_TEST",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "prodDocker",
+    "password": "prodPass",
+    "database": "SM_DB_PROD",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}

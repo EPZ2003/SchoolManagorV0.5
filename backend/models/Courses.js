@@ -14,7 +14,20 @@ const Courses = sequelize.define('Courses',{
     module: {
         type: DataTypes.STRING,
         allowNull:true
+    },
+    tdSubmission: {
+        type: DataTypes.DATE,
+        allowNull:true
+    },
+    nextExam: {
+        type: DataTypes.DATE,
+        allowNull:true
+    },
+    project: {
+        type: DataTypes.DATE,
+        allowNull:true
     }
+
 },{
     tableName:'Courses',
     timestamps: true // Automatically adds createdAt and updatedAt fields

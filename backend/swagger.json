@@ -39,7 +39,10 @@
                     "properties": {
                       "id": { "type": "integer" },
                       "course": { "type": "string" },
-                      "module": { "type": "string" }
+                      "module": { "type": "string" },
+                      "tdSubmission": { "type": "string", "format": "date" },
+                      "nextExam": { "type": "string", "format": "date" },
+                      "project": { "type": "string" }
                     }
                   }
                 }
@@ -74,7 +77,10 @@
                   "properties": {
                     "id": { "type": "integer" },
                     "course": { "type": "string" },
-                    "module": { "type": "string" }
+                    "module": { "type": "string" },
+                    "tdSubmission": { "type": "string", "format": "date" },
+                    "nextExam": { "type": "string", "format": "date" },
+                    "project": { "type": "string" }
                   }
                 }
               }
@@ -101,64 +107,44 @@
                     "type": "string",
                     "description": "Module of the course",
                     "example": "Algebra"
+                  },
+                  "tdSubmission": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Submission date for the course",
+                    "example": "2025-01-15"
+                  },
+                  "nextExam": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Next exam date for the course",
+                    "example": "2025-02-20"
+                  },
+                  "project": {
+                    "type": "string",
+                    "description": "Description of the project associated with the course",
+                    "example": "Build a mathematical model"
                   }
                 },
-                "required": ["course", "module"]
+                "required": ["course", "module", "tdSubmission", "nextExam", "project"]
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Course created successfully",
+          "200": {
+            "description": "Course added successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Course created successfully"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "course": { "type": "string" },
-                        "module": { "type": "string" }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Course and module are required!"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Internal server error"
-                    }
+                    "id": { "type": "integer" },
+                    "course": { "type": "string" },
+                    "module": { "type": "string" },
+                    "tdSubmission": { "type": "string", "format": "date" },
+                    "nextExam": { "type": "string", "format": "date" },
+                    "project": { "type": "string" }
                   }
                 }
               }
@@ -168,48 +154,44 @@
       },
       "put": {
         "summary": "Update an existing course",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "ID of the course to update",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "example": 2
-            }
-          },
-          {
-            "name": "column",
-            "in": "query",
-            "description": "The column name to update",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "module"
-            }
-          },
-          {
-            "name": "value",
-            "in": "query",
-            "description": "The new value for the column",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Calculus"
+        "requestBody": {
+          "description": "Details to update the course",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the course to update",
+                    "example": 2
+                  },
+                  "column": {
+                    "type": "string",
+                    "description": "The column name to update",
+                    "example": "module"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "The new value for the column",
+                    "example": "Calculus"
+                  }
+                },
+                "required": ["id", "column", "value"]
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "Course updated successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "updated": { "type": "integer" }
-                  }
+                  "type": "integer",
+                  "description": "Number of rows affected",
+                  "example": 1
                 }
               }
             }
@@ -218,28 +200,34 @@
       },
       "delete": {
         "summary": "Delete a course by ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "ID of the course to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "example": 1
+        "requestBody": {
+          "description": "ID of the course to delete",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID of the course to delete",
+                    "example": 1
+                  }
+                },
+                "required": ["id"]
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "Course deleted successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "deleted": { "type": "integer", "example": 1 }
-                  }
+                  "type": "integer",
+                  "description": "Number of rows deleted",
+                  "example": 1
                 }
               }
             }

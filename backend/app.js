@@ -52,14 +52,20 @@ app.get('/course',async (req,res) => {
 
 //Post Method to add new courses 
 app.post('/course', async (req,res) =>{
-  const {course,module} = req.body 
-  const query = await Courses.create({course: course ,module:module} )
+  const {course,module,tdSubmission,nextExam,project} = req.body 
+  const query = await Courses.create({
+    course: course,
+    module:module,
+    tdSubmission:tdSubmission,
+    nextExam:nextExam,
+    project:project
+  });
   res.send(JSON.stringify(query))
 })
 
 //Update existing courses
 app.put('/course', async(req,res) => {
-  const {id,column,value} = req.query;
+  const {id,column,value} = req.body;
   const query = await Courses.update(
       {[column]: value},
       {
@@ -73,7 +79,7 @@ app.put('/course', async(req,res) => {
 
 //Delete existing courses 
 app.delete('/course', (req,res) => {
-  const id = req.query.id
+  const id = req.body.id
     const query = Courses.destroy({
       where: {
         id: id
