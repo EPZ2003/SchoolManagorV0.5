@@ -21,6 +21,42 @@ Follow these steps to execute the backend:
     Executing (default): SELECT 1+1 AS result
     
     Connection established successfully for the Table Course 
+    ```
+## How to add column into a Sequelize table
+Follow thses steps into the backend repo: 
+
+1. Add the column you want to add into the config folder
+2. Run this command:
+   ```bash
+   npx sequelize-cli migration:generate --name add-new-columns-to-courses
+   ```
+   It will display something like this :
+   ```bash 
+   Sequelize CLI [Node: 18.19.1, CLI: 6.6.2, ORM: 6.37.5]
+   
+   Successfully created migrations folder at "/home/enzo/SoftwareUsefull/GitFolder/SchoolManagorV0.5/backend/migrations".
+   New migration was created at /home/enzo/SoftwareUsefull/GitFolder/SchoolManagorV0.5/backend/migrations/20250109193705-add-new-columns-to-courses.js .
+   ```
+3. Go to the generated file named into the migrations folder and open the created file (ex above: 20250109193705-add-new-columns-to-courses.js ) 
+
+4. Add Column and remove Column according to the commentary
+
+5. Create the file config.json (if it's note already here ) into the congif directory fullfield with the informations of your database
+
+6. Run this command :
+   ```bash
+   npx sequelize-cli db:migrate
+   ```
+   It should print something like :
+   ```bash
+   Sequelize CLI [Node: 18.19.1, CLI: 6.6.2, ORM: 6.37.5]
+
+   Loaded configuration file "config/config.json".
+   Using environment "development".
+   == 20250109193705-add-new-columns-to-courses: migrating =======
+   == 20250109193705-add-new-columns-to-courses: migrated (0.028s)
+   ```
+7. And It works :)
 
 # Frontend Part
 
