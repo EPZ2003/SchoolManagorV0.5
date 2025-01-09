@@ -84,39 +84,81 @@
       },
       "post": {
         "summary": "Add a new course",
-        "parameters": [
-          {
-            "name": "course",
-            "in": "query",
-            "description": "Name of the course",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Mathematics"
-            }
-          },
-          {
-            "name": "module",
-            "in": "query",
-            "description": "Module of the course",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "Algebra"
+        "requestBody": {
+          "description": "Details of the course to be added",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "course": {
+                    "type": "string",
+                    "description": "Name of the course",
+                    "example": "Mathematics"
+                  },
+                  "module": {
+                    "type": "string",
+                    "description": "Module of the course",
+                    "example": "Algebra"
+                  }
+                },
+                "required": ["course", "module"]
+              }
             }
           }
-        ],
+        },
         "responses": {
-          "200": {
-            "description": "New course created",
+          "201": {
+            "description": "Course created successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": { "type": "integer" },
-                    "course": { "type": "string" },
-                    "module": { "type": "string" }
+                    "message": {
+                      "type": "string",
+                      "example": "Course created successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "course": { "type": "string" },
+                        "module": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Course and module are required!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
                   }
                 }
               }

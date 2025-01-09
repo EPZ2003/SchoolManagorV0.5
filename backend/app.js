@@ -14,10 +14,11 @@ const swaggerDoc = JSON.parse(fs.readFileSync(path.join(__dirname,'swagger.json'
 
 //Serve uses Swagger UI 
 app.use('/swagger-docs',swaggerUi.serve,swaggerUi.setup(swaggerDoc));
-
+//To receive JSON object 
+app.use(express.json())
 //For testin the synchronization
-/*
-(async () => {
+
+/*(async () => {
     try {
       // Sync models with the database
       await sequelize.sync({ force: true }); // Use { alter: true } for safe schema updates
@@ -48,12 +49,14 @@ app.get('/course',async (req,res) => {
   const courses = await Courses.findByPk(id)
   res.send(JSON.stringify(courses))
 })
+
 //Post Method to add new courses 
 app.post('/course', async (req,res) =>{
-  const {course,module} = req.query  
+  const {course,module} = req.body 
   const query = await Courses.create({course: course ,module:module} )
   res.send(JSON.stringify(query))
 })
+
 //Update existing courses
 app.put('/course', async(req,res) => {
   const {id,column,value} = req.query;

@@ -17,13 +17,10 @@ export class CreationCourseComponent {
     module:'',
   }
   ngOnInit(){
-    this.course = {
-      course:"enzo",
-      module:"enzo",
-    }
   }
+  //Calling the post method with the filled course
   createCourse() {
-    this.apiService.createCourse({course:"test",module:"test"}).subscribe({
+    this.apiService.createCourse(this.course).subscribe({
       next:() => console.log("OK"),
       error: error => console.log("WRONG")
     })
