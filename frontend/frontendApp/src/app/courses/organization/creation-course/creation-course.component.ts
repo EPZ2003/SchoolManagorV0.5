@@ -15,6 +15,9 @@ export class CreationCourseComponent {
   course:Courses = {
     course:'',
     module:'',
+    tdSubmission:null,
+    nextExam:null,
+    project:null,
   }
 
   //Calling the post method with the filled course

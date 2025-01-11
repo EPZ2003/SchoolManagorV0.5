@@ -112,18 +112,18 @@
                     "type": "string",
                     "format": "date",
                     "description": "Submission date for the course",
-                    "example": "2025-01-15"
+                    "example": "2025-01-15T00:00:00.000Z"
                   },
                   "nextExam": {
                     "type": "string",
                     "format": "date",
                     "description": "Next exam date for the course",
-                    "example": "2025-02-20"
+                    "example": "2025-01-15T00:00:00.000Z"
                   },
                   "project": {
                     "type": "string",
                     "description": "Description of the project associated with the course",
-                    "example": "Build a mathematical model"
+                    "example": "2025-01-15T00:00:00.000Z"
                   }
                 },
                 "required": ["course", "module", "tdSubmission", "nextExam", "project"]
