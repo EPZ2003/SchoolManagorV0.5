@@ -37,6 +37,8 @@ export class DeadlineComponent implements OnInit{
     {field:"project"},
 
   ]
+  
+
 
   ngOnInit(): void {
     this.loadData()
@@ -53,12 +55,12 @@ export class DeadlineComponent implements OnInit{
         project:this.dateToString(item.project)
       }
 
-      
+  
     }),
     error: err => console.error('Deadline Component',err)
     })
   }
-  
+
 
   //this transform inputs Sequelize.DATE types into DD-MM-YY format
   dateToString(unformattedDate: string | null): string | null {
