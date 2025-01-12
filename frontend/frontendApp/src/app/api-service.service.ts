@@ -18,7 +18,7 @@ export class ApiServiceService {
     return this.httpClient.post<Courses>('api/course',course)
   }
 
-  updateCourse(colum:any) : Observable<any> {
-    return this.httpClient.put<Courses>('api/course',colum)
+  updateCourse(id:number,column:any,value:any) : Observable<any> {
+    return this.httpClient.put<Courses>('api/course',{id,column,value})
   }
 }

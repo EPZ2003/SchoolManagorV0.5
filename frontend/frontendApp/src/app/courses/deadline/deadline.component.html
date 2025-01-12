@@ -4,4 +4,6 @@
       class="ag-theme-alpine"
       [rowData]="rowData"
       [columnDefs]="colDefs"
+      (cellKeyDown)="onCellKeyDown($event)"
+
     ></ag-grid-angular>

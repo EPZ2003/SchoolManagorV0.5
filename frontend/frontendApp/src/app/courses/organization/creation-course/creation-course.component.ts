@@ -13,6 +13,7 @@ export class CreationCourseComponent {
   private readonly apiService: ApiServiceService = inject(ApiServiceService);
   
   course:Courses = {
+    id: -1,
     course:'',
     module:'',
     tdSubmission:null,
