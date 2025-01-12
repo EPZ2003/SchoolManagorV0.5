@@ -7,14 +7,14 @@ import { Courses } from '../../models/Courses.dto';
 import type { ColDef, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
 import { format } from 'path';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 
 // Register all Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
 @Component({
   selector: 'app-deadline',
-  imports: [AgGridAngular,RouterOutlet],
+  imports: [AgGridAngular,RouterOutlet,RouterLink],
   templateUrl: './deadline.component.html',
   styleUrl: './deadline.component.css'
 })
@@ -31,7 +31,6 @@ export class DeadlineComponent implements OnInit{
       field:"tdSubmission",
       editable:true,
       enableCellChangeFlash:true,
-      
     },
     {
       field:"nextExam",
