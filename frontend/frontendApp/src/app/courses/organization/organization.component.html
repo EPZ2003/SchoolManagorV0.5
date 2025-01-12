@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mx-auto" style="max-width: 80%;">
   <div class="row">
     <div class="col-md-4">
       <ag-grid-angular
@@ -6,6 +6,7 @@
       class="ag-theme-alpine"
       [rowData]="rowDataModA"
       [columnDefs]="colDefs"
+      [theme]="theme1"
     ></ag-grid-angular>
     </div>
     <div class="col-md-4">
@@ -14,6 +15,7 @@
       class="ag-theme-alpine"
       [rowData]="rowDataModB"
       [columnDefs]="colDefs"
+      [theme]="theme1"
     ></ag-grid-angular>
     </div>
     <div class="col-md-4">
@@ -22,6 +24,7 @@
       class="ag-theme-alpine"
       [rowData]="rowDataModC"
       [columnDefs]="colDefs"
+      [theme]="theme1"
     ></ag-grid-angular>
     </div>
     <div class="text-end">

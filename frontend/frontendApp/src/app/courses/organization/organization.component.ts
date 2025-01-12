@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
 import type { ColDef } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
+import { AllCommunityModule, colorSchemeDarkBlue, ModuleRegistry, themeQuartz } from 'ag-grid-community'; 
 import { ApiServiceService } from '../../api-service.service';
 import { Courses } from '../../models/Courses.dto';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -15,6 +15,8 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrl: './organization.component.css'
 })
 export class OrganizationComponent {
+  //Importing pre-built ag-grid themes 
+    theme1 = themeQuartz.withPart(colorSchemeDarkBlue);
   //Injection with the service that comunicates with the backend
   private readonly apiService:ApiServiceService = inject(ApiServiceService);
 
@@ -40,9 +42,9 @@ export class OrganizationComponent {
     this.apiService.getCourses().subscribe({
       next: data => {
         //Using filter for each table and choose the good module for each one (ex: ) 
-        this.rowDataModA = data.filter(item => item.module =="algebra"); 
-        this.rowDataModB = data.filter(item => item.module =="science");
-        this.rowDataModC = data.filter(item => item.module =="physics"); 
+        this.rowDataModA = data.filter(item => item.module ==="Standard Track"); 
+        this.rowDataModB = data.filter(item => item.module ==="CCC");
+        this.rowDataModC = data.filter(item => item.module ==="Computer Science"); 
       },
       error: err => console.error('Error fetching courses:', err)
     });
