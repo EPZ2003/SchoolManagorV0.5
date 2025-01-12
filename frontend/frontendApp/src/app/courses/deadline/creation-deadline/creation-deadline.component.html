@@ -1,0 +1,63 @@
+<p>creation-deadline works!</p>
+<div class="col-md-4">
+    <label for="course" class="form-label">Course</label>
+    <input
+        type="text"
+        id="course"
+        class="form-control"
+        [(ngModel)]="course.course"
+        name="course"
+        placeholder="Enter course name"
+        required/>
+</div>
+<div class="col-md-4">
+    <label for="course" class="form-label">module</label>
+    <input
+        type="text"
+        id="course"
+        class="form-control"
+        [(ngModel)]="course.module"
+        name="course"
+        placeholder="Enter course name"
+        required/>
+</div>
+<div class="col-md-4">
+    <label for="course" class="form-label">tdSubmission</label>
+    <input
+        type="date"
+        id="course"
+        class="form-control"
+        [(ngModel)]="course.tdSubmission"
+        name="course"
+        placeholder="Enter course name"
+        required/>
+</div>
+<div class="col-md-4">
+    <label for="course" class="form-label">nextExam</label>
+    <input
+        type="date"
+        id="course"
+        class="form-control"
+        [(ngModel)]="course.nextExam"
+        name="course"
+        placeholder="Enter course name"
+        required/>
+</div>
+<div class="col-md-4">
+    <label for="course" class="form-label">project</label>
+    <input
+        type="date"
+        id="course"
+        class="form-control"
+        [(ngModel)]="course.project"
+        name="course"
+        placeholder="Enter course name"
+        required/>
+</div>
+<div>
+    <h4>Current Object:</h4>
+    <pre>{{ course | json }}</pre>
+</div>
+<div class="col-md-12 text-end">
+    <button (click)="createCourse()" class="btn btn-outline-success">Ajoutez le cours</button>
+</div>
