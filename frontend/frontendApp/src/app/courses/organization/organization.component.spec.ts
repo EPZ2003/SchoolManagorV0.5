@@ -18,7 +18,7 @@ describe('OrganizationComponent', () => {
     await TestBed.configureTestingModule({
       providers : [
         
-        //This i for ActivatedRoute
+        //This is for ActivatedRoute
         {
           provide : ActivatedRoute,
           useValue : {
@@ -28,7 +28,6 @@ describe('OrganizationComponent', () => {
             queryParams: of( {query : 'test'})
           }
         },
-        
         //This is for HttpClient Module
         provideHttpClient(),
         provideHttpClientTesting()

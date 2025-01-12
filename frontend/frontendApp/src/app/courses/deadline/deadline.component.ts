@@ -6,7 +6,6 @@ import { Courses } from '../../models/Courses.dto';
 //Ag-grid imports
 import type { ColDef, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
-import { format } from 'path';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 
