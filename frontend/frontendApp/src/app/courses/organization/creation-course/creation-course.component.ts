@@ -13,15 +13,15 @@ export class CreationCourseComponent {
   private readonly apiService: ApiServiceService = inject(ApiServiceService);
   
   course:Courses = {
+    id: -1,
     course:'',
     module:'',
+    tdSubmission:null,
+    nextExam:null,
+    project:null,
   }
-  ngOnInit(){
-    this.course = {
-      course:"enzo",
-      module:"enzo",
-    }
-  }
+
+  //Calling the post method with the filled course
   createCourse() {
     this.apiService.createCourse(this.course).subscribe({
       next:() => console.log("OK"),

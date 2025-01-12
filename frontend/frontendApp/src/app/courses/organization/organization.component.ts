@@ -4,19 +4,23 @@ import type { ColDef } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
 import { ApiServiceService } from '../../api-service.service';
 import { Courses } from '../../models/Courses.dto';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 // Register all Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
 @Component({
   selector: 'app-organization',
-  imports: [AgGridAngular,RouterOutlet],
+  imports: [AgGridAngular,RouterOutlet,RouterLink],
   templateUrl: './organization.component.html',
   styleUrl: './organization.component.css'
 })
 export class OrganizationComponent {
   //Injection with the service that comunicates with the backend
   private readonly apiService:ApiServiceService = inject(ApiServiceService);
+
+  //For the toogleButton
+  isActive:boolean = false;
+  toCreate:string = "creation";
 
   //Creation of 3 rowData for 3 differents tables with the same colDefs
   rowDataModA:Courses[] = [];
@@ -38,11 +42,15 @@ export class OrganizationComponent {
         //Using filter for each table and choose the good module for each one (ex: ) 
         this.rowDataModA = data.filter(item => item.module =="algebra"); 
         this.rowDataModB = data.filter(item => item.module =="science");
-        //this.rowDataModC = data.filter(item => item.module =="physics"); 
-        this.rowDataModC = data; 
+        this.rowDataModC = data.filter(item => item.module =="physics"); 
       },
       error: err => console.error('Error fetching courses:', err)
     });
+  }
+
+  //Toggle the string that enable or back the initial subpages 
+  toggleCreation() {
+  
   }
 
 }
