@@ -6,12 +6,7 @@ import { Courses } from '../../models/Courses.dto';
 //Ag-grid imports
 import type { ColDef, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
-<<<<<<< HEAD
-import { RouterOutlet } from '@angular/router';
-=======
-import { format } from 'path';
 import { RouterLink, RouterOutlet } from '@angular/router';
->>>>>>> safeBranch
 
 
 // Register all Community features
