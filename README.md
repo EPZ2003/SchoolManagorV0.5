@@ -1,3 +1,11 @@
+# Launch All
+## Open Docker desktop then execute the launch file on your project directory and execute this command 
+   ```bash
+   bash launch.sh
+   ```
+   You have to wait until the web page open in the login page
+   
+
 # Backend Part
 
 ## Technologies Used
