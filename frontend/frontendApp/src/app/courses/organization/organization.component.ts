@@ -16,13 +16,13 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 })
 export class OrganizationComponent {
   //Importing pre-built ag-grid themes 
-    theme1 = themeQuartz.withPart(colorSchemeDarkBlue);
+  theme1 = themeQuartz.withPart(colorSchemeDarkBlue)
   //Injection with the service that comunicates with the backend
   private readonly apiService:ApiServiceService = inject(ApiServiceService);
 
   //For the toogleButton
-  isActive:boolean = false;
-  toCreate:string = "creation";
+  toAdd:string = "creation";
+  addButton:string = "ADD";
 
   //Creation of 3 rowData for 3 differents tables with the same colDefs
   rowDataModA:Courses[] = [];
@@ -30,12 +30,13 @@ export class OrganizationComponent {
   rowDataModC:Courses[] = [];
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-      { field: "course", flex: 1},
-      { field: "module", flex: 1},
+      { field: "course", flex: 1,cellStyle:{fontSize : '20px'}},
+      { field: "module", flex: 1,cellStyle:{fontSize : '20px'}},
   ];
 
   ngOnInit(){
       this.loadData()
+      this.addButton = "ADD"
     }
 
   loadData(): void {
@@ -52,7 +53,18 @@ export class OrganizationComponent {
 
   //Toggle the string that enable or back the initial subpages 
   toggleCreation() {
-  
+    switch (this.addButton) {
+      case "ADD":
+        this.addButton = "CANCEL";
+        this.toAdd = "./"
+        break;
+      case "CANCEL":
+        this.addButton = "ADD";
+        this.toAdd = "creation"
+        break;
+      default:
+        break;
   }
+}
 
 }

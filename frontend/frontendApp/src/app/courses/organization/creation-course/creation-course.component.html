@@ -1,8 +1,7 @@
-
-<div class="container-md">
-    <div class="row">
+<div class="container">
+    <div class="row justify-content-start p-5">
         <div class="col-md-4">
-            <label for="course" class="form-label">Course</label>
+            <label for="course" class="form-label text-primary">Course</label>
             <input
                 type="text"
                 id="course"
@@ -12,24 +11,10 @@
                 placeholder="Enter course name"
                 required/>
         </div>
-        <div class="col-md-4 auto text-auto">
-            <!-- Display the Object 
-            <div>
-                <h4>Current Object:</h4>
-                <pre>{{ course | json }}</pre>
-            </div>-->
-        </div>
-        <div class="col-md-4 auto text-auto">
-            <!-- Display the Object -->
-            <div>
-                <h4>Current Object:</h4>
-                <pre>{{ course | json }}</pre>
-            </div>
-        </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-start p-5">
         <div class="col-md-4">
-            <label for="module" class="form-label">Module</label>
+            <label for="module" class="form-label text-primary">Module</label>
             <input
                 type="text"
                 id="module"
@@ -39,18 +24,10 @@
                 placeholder="Enter module name"
                 required/>
         </div>
-        
     </div>
-    <div class="col-md-12 text-end">
-        <button (click)="createCourse()" class="btn btn-outline-success">Ajoutez le cours</button>
+    <div class="row justify-content-start p-5">
+        <div class="col-md-4 text-end">
+            <button (click)="createCourse()" class="btn btn-outline-success">Ajoutez le cours</button>
+        </div>
     </div> 
 </div>
-
-    
-
-    
-    
-    
-    
-
-  
