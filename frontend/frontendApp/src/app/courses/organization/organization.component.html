@@ -1,3 +1,4 @@
+<h3 class="text-danger text-center">Press d for deleteing a row </h3>
 <div class="container mx-auto" style="max-width: 80%;">
   <div class="row">
     <div class="col-md-4">
@@ -7,6 +8,7 @@
       [rowData]="rowDataModA"
       [columnDefs]="colDefs"
       [theme]="theme1"
+      (cellKeyDown)="onCellKeyDown($event)"
     ></ag-grid-angular>
     </div>
     <div class="col-md-4">
@@ -16,6 +18,7 @@
       [rowData]="rowDataModB"
       [columnDefs]="colDefs"
       [theme]="theme1"
+      (cellKeyDown)="onCellKeyDown($event)"
     ></ag-grid-angular>
     </div>
     <div class="col-md-4">
@@ -25,11 +28,21 @@
       [rowData]="rowDataModC"
       [columnDefs]="colDefs"
       [theme]="theme1"
+      (cellKeyDown)="onCellKeyDown($event)"
     ></ag-grid-angular>
     </div>
-    <div class="text-end">
-      <button (click)="toggleCreation()" class="btn btn-outline-primary" routerLink={{toAdd}}>{{addButton}}</button>
+    <div class="row">
+      <div class="col-md-10">
+        <!--Nothing to do -->
+      </div>
+      <div class="col-md-2 text-end">
+        <button (click)="addToogleButton()" class="btn btn-outline-success" routerLink={{toAdd}}>{{addButton}}</button>
+      </div>
+      
     </div>
+    
+
+    
   </div>
   
 
