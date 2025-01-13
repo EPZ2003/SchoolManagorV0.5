@@ -211,7 +211,7 @@
                   "id": {
                     "type": "integer",
                     "description": "ID of the course to delete",
-                    "example": 1
+                    "example": 12
                   }
                 },
                 "required": ["id"]

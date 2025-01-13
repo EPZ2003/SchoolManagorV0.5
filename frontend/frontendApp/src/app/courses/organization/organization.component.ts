@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
 import type { ColDef } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
+import { AllCommunityModule, colorSchemeDarkBlue, ModuleRegistry, themeQuartz } from 'ag-grid-community'; 
 import { ApiServiceService } from '../../api-service.service';
 import { Courses } from '../../models/Courses.dto';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -15,42 +15,74 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrl: './organization.component.css'
 })
 export class OrganizationComponent {
+
+  //Importing pre-built ag-grid themes 
+  theme1 = themeQuartz.withPart(colorSchemeDarkBlue)
+
   //Injection with the service that comunicates with the backend
   private readonly apiService:ApiServiceService = inject(ApiServiceService);
 
-  //For the toogleButton
-  isActive:boolean = false;
-  toCreate:string = "creation";
+  //For the addToogleButton
+  toAdd:string = "creation";
+  addButton:string = "ADD";
 
   //Creation of 3 rowData for 3 differents tables with the same colDefs
   rowDataModA:Courses[] = [];
   rowDataModB:Courses[] = [];
   rowDataModC:Courses[] = [];
+
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-      { field: "course", flex: 1},
-      { field: "module", flex: 1},
+    { field: "course", flex: 1,cellStyle:{fontSize : '20px'}},
+    { field: "module", flex: 1,cellStyle:{fontSize : '20px'}},
   ];
+  
+  //row slection 
+  rowSelection: 'multiple'  = 'multiple';
 
   ngOnInit(){
       this.loadData()
-    }
+      this.addButton = "ADD"
+  }
 
   loadData(): void {
     this.apiService.getCourses().subscribe({
       next: data => {
+
         //Using filter for each table and choose the good module for each one (ex: ) 
-        this.rowDataModA = data.filter(item => item.module =="algebra"); 
-        this.rowDataModB = data.filter(item => item.module =="science");
-        this.rowDataModC = data.filter(item => item.module =="physics"); 
+        this.rowDataModA = data.filter(item => item.module ==="Standard Track"); 
+        this.rowDataModB = data.filter(item => item.module ==="CCC");
+        this.rowDataModC = data.filter(item => item.module ==="Computer Science");
       },
       error: err => console.error('Error fetching courses:', err)
     });
   }
 
   //Toggle the string that enable or back the initial subpages 
-  toggleCreation() {
-  
+  addToogleButton() {
+    switch (this.addButton) {
+      case "ADD":
+        this.addButton = "CANCEL";
+        this.toAdd = "./"
+        break;
+      case "CANCEL":
+        this.addButton = "ADD";
+        this.toAdd = "creation"
+        break;
+      default:
+        break;
+    }
+  }
+
+  onCellKeyDown(event:any):void {
+    if (event.event.key === 'd'){
+      const id = event.data.id
+      console.log(id)
+      this.apiService.deleteCourse(id).subscribe({
+        next: () => console.log("OK"),
+        error: err => console.log("Organization component don't work",err)
+      })
+    }
   }
 
 }

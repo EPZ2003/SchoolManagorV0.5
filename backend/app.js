@@ -78,13 +78,9 @@ app.put('/course', async(req,res) => {
 })
 
 //Delete existing courses 
-app.delete('/course', (req,res) => {
-  const id = req.body.id
-    const query = Courses.destroy({
-      where: {
-        id: id
-      }
-    });
+app.delete('/course', async(req,res) => {
+  const {id}= req.body
+  const query = Courses.destroy( { where: {id:id } }  );
   res.send(query)
 })
 

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-creation-course',
-  imports: [FormsModule,JsonPipe],
+  imports: [FormsModule],
   templateUrl: './creation-course.component.html',
   styleUrl: './creation-course.component.css'
 })

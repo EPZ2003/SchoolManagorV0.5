@@ -4,5 +4,6 @@ export interface Courses {
     module:string,
     tdSubmission:string | null,
     nextExam:string | null,
-    project:string | null
+    project:string | null,
+    
 }

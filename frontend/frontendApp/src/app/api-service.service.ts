@@ -21,4 +21,7 @@ export class ApiServiceService {
   updateCourse(id:number,column:any,value:any) : Observable<any> {
     return this.httpClient.put<Courses>('api/course',{id,column,value})
   }
+  deleteCourse(id:number) : Observable<any> {
+    return this.httpClient.delete<Courses>('api/course',{body: { id }} ) 
+  }
 }
