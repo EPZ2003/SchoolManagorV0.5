@@ -5,7 +5,7 @@ import { Courses } from '../../models/Courses.dto';
 
 //Ag-grid imports
 import type { ColDef, GetRowIdParams, GridApi, GridOptions } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
+import { AllCommunityModule, colorSchemeDarkBlue, ModuleRegistry, themeQuartz } from 'ag-grid-community'; 
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 
@@ -18,31 +18,64 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   styleUrl: './deadline.component.css'
 })
 export class DeadlineComponent implements OnInit{
-  
   private readonly apiService: ApiServiceService = inject(ApiServiceService);
+  //Importing pre-built ag-grid themes 
+  theme1 = themeQuartz.withPart(colorSchemeDarkBlue)
+  
+  //For the toogleButton
+  toAdd:string = "creation";
+  addButton:string = "ADD";
+
 
   rowData:Courses[] = []
   
   colDefs:ColDef[] = [
-    {field:"course"},
-    {field:"module"},
+    {field:"course",flex:1},
+    {field:"module",flex:1},
     {
       field:"tdSubmission",
       editable:true,
       enableCellChangeFlash:true,
+      flex:1
     },
     {
       field:"nextExam",
       editable:true,
       enableCellChangeFlash:true,
+      flex:1
     },
     {
       field:"project",
       editable:true,
       enableCellChangeFlash:true,
+      flex:1
     },
   ]
   
+  ngOnInit(): void {
+    this.loadData()    
+  }
+
+  loadData(){
+    this.apiService.getCourses().subscribe({
+    next: data => this.rowData = data.map( item => {
+      return{
+        id:item.id,
+        course:item.course,
+        module:item.module,
+        tdSubmission:this.dateToString(item.tdSubmission),
+        nextExam:this.dateToString(item.nextExam),
+        project:this.dateToString(item.project)
+      }//Filter To choose only modules courses
+    }).filter( 
+      item => ( 
+        item.module ==="Standard Track" || 
+        item.module ==="CCC" ||
+        item.module ==="Computer Science")),
+    error: err => console.error('Deadline Component',err)
+    })
+  }
+
   //When the enter key is pressed then we call the backend to update the row 
   onCellKeyDown(event: any) : void{
     if (event.event.key === "Enter") {
@@ -61,27 +94,6 @@ export class DeadlineComponent implements OnInit{
       })
     }
   }
-
-  ngOnInit(): void {
-    this.loadData()    
-  }
-
-  loadData(){
-    this.apiService.getCourses().subscribe({
-    next: data => this.rowData = data.map( item => {
-      return{
-        id:item.id,
-        course:item.course,
-        module:item.module,
-        tdSubmission:this.dateToString(item.tdSubmission),
-        nextExam:this.dateToString(item.nextExam),
-        project:this.dateToString(item.project)
-      }
-    }),
-    error: err => console.error('Deadline Component',err)
-    })
-  }
-
 
   //this transform inputs Sequelize.DATE types into DD-MM-YY format
   dateToString(unformattedDate: string | null): string | null {
@@ -107,4 +119,20 @@ export class DeadlineComponent implements OnInit{
     const formatedString = "20"+dateSplited[2]+"-"+dateSplited[1]+"-"+dateSplited[0]
     return new Date(formatedString)
   }
+
+  //Toggle the string that enable or back the initial subpages 
+  toggleCreation() {
+    switch (this.addButton) {
+      case "ADD":
+        this.addButton = "CANCEL";
+        this.toAdd = "./"
+        break;
+      case "CANCEL":
+        this.addButton = "ADD";
+        this.toAdd = "creation"
+        break;
+      default:
+        break;
+      }
+    }
 }
