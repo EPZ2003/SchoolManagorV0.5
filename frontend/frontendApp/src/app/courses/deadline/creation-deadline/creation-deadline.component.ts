@@ -7,7 +7,7 @@ import { DeadlineComponent } from '../deadline.component';
 
 @Component({
   selector: 'app-creation-deadline',
-  imports: [FormsModule,JsonPipe],
+  imports: [FormsModule],
   templateUrl: './creation-deadline.component.html',
   styleUrl: './creation-deadline.component.css'
 })
